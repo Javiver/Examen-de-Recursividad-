@@ -1,0 +1,70 @@
+import java.util.Scanner;
+
+public class ConcatenarListaCircularUI {
+
+    public static class Nodo {
+        private String valor;
+        private Nodo siguiente;
+
+        public Nodo(String valor) {
+            this.valor = valor;
+        }
+
+        public String getValor() {
+            return valor;
+        }
+
+        public void setSiguiente(Nodo siguiente) {
+            this.siguiente = siguiente;
+        }
+
+        public Nodo getSiguiente() {
+            return siguiente;
+        }
+    }
+
+    public static class ListaCircular {
+        private Nodo cabeza;
+
+        public void agregarNodo(String valor) {
+            Nodo nuevoNodo = new Nodo(valor);
+            if (cabeza == null) {
+                cabeza = nuevoNodo;
+                cabeza.setSiguiente(cabeza);
+            } else {
+                Nodo nodoActual = cabeza;
+                while (nodoActual.getSiguiente()!= cabeza) {
+                    nodoActual = nodoActual.getSiguiente();
+                }
+                nodoActual.setSiguiente(nuevoNodo);
+                nuevoNodo.setSiguiente(cabeza);
+            }
+        }
+
+        public String concatenar() {
+            StringBuilder resultado = new StringBuilder();
+            Nodo nodoActual = cabeza;
+            do {
+                resultado.append(nodoActual.getValor()).append(" ");
+                nodoActual = nodoActual.getSiguiente();
+            } while (nodoActual!= cabeza);
+            return resultado.toString();
+        }
+    }
+
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+
+        System.out.print("Ingrese la cantidad de nodos de la lista circular: ");
+        int cantidadNodos = scanner.nextInt();
+
+        ListaCircular lista = new ListaCircular();
+        for (int i = 0; i < cantidadNodos; i++) {
+            System.out.print("Ingrese el valor del nodo " + (i + 1) + ": ");
+            String valorNodo = scanner.next();
+            lista.agregarNodo(valorNodo);
+        }
+        String cadenaConcatenada = lista.concatenar();
+        System.out.println("Cadena concatenada: " + cadenaConcatenada);
+    }
+}
