@@ -1,0 +1,24 @@
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+import java.util.Scanner;
+
+public class Main {
+
+    public static void main(String[] args) {
+        List<Integer> lista = new ArrayList<>();
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Por favor ingrese la cantidad de elementos en la lista:");
+        int n = scanner.nextInt();
+        System.out.println("Por favor ingrese los elementos de la lista:");
+        for (int i = 0; i < n; i++) {
+            lista.add(scanner.nextInt());
+        }
+        System.out.println("Los elementos de la lista en orden invertido:");
+        Collections.reverse(lista);
+        for (int elemento : lista) {
+            System.out.println(elemento);
+        }
+        System.out.println("Muchas gracias por usar este programa");
+    }
+}
